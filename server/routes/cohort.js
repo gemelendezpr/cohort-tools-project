@@ -10,14 +10,27 @@ router.post("/", (req, res, next) => {
       res.status(201).send(createdCohort);
     })
     .catch((error) => {
-      console.error("Error while creating the book ->", error);
-      res.status(500).send({ error: "Failed to create the book" });
+      console.error("Error while creating the cohort ->", error);
+      res.status(500).send({ error: "Failed to create the cohort" });
     })
 });
 
 router.get("/", (req, res, next) => {
     console.log("Hitting get route")
   Cohort.find()
+    .then((foundCohorts) => {
+      console.log(foundCohorts);
+      res.status(201).send(foundCohorts);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+});
+
+router.get("/:id", (req, res, next) => {
+    console.log("Hitting get route")
+  Cohort.findById(req.params.id)
     .then((foundCohorts) => {
       console.log(foundCohorts);
       res.status(201).send(foundCohorts);

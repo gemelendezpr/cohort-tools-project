@@ -12,6 +12,6 @@ const studentSchema = new Schema({
     image: { type: String, default: "https://i.imgur.com/r8bo8u7.png" },
     projects: { type: [String] },
     cohort: { type: Schema.Types.ObjectId, ref: "Cohort"}
-  });
+  }, { versionKey: false });
 
 module.exports = model("Student", studentSchema);
