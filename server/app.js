@@ -11,7 +11,6 @@ const mongoose = require("mongoose");
 var cohortsRouter = require("./routes/cohort");
 var studentsRouter = require("./routes/student");
 var usersRouter = require('./routes/users');
-var tasksRouter = require('./routes/tasks');
 var authRouter = require('./routes/auth')
 
 var app = express();
@@ -33,7 +32,6 @@ app.use(cookieParser());
 app.use("/cohorts", cohortsRouter); 
 app.use("/students", studentsRouter); 
 app.use('/users', usersRouter);
-app.use('/tasks', tasksRouter);
 app.use('/auth', authRouter);
 
 
