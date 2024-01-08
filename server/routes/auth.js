@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+const isAuthenticated = require('../middleware/isAuthenticated')
+
 const saltRounds = 10;
 
 // POST  /auth/signup
@@ -87,7 +89,7 @@ router.post("/login", (req, res, next) => {
     .then((foundUser) => {
       if (!foundUser) {
         // If the user is not found, send an error response
-        res.status(401).json({ message: "User not found." });
+        res.status(401).json({ message: "Incorrect Email or Password" });
         return;
       }
 
@@ -102,13 +104,13 @@ router.post("/login", (req, res, next) => {
         const payload = { _id, email, name };
 
         // Create and sign the token
-        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+        const authToken = jwt.sign(payload, process.env.SECRET, {
           algorithm: "HS256",
           expiresIn: "6h",
         });
 
         // Send the token as the response
-        res.status(200).json({ authToken: authToken });
+        res.status(200).json({ authToken });
       } else {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
@@ -120,13 +122,14 @@ router.post("/login", (req, res, next) => {
 
 router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE NEW ROUTE
  
-  // If JWT token is valid the payload gets decoded by the
-  // isAuthenticated middleware and made available on `req.payload`
-  console.log("req.user", req.user);
- 
-  // Send back the object with user data
-  // previously set as the token payload
-  res.status(200).json(req.user);
-});
+    // If JWT token is valid the payload gets decoded by the
+    // isAuthenticated middleware and made available on `req.user`
+    console.log("req.user", req.user);
+   
+    // Send back the object with user data
+    // previously set as the token payload
+    res.status(200).json(req.user);
+  });
+// ...
 
 module.exports = router;
