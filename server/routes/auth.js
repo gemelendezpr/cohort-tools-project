@@ -64,12 +64,12 @@ router.post("/signup", (req, res, next) => {
         })
         .catch((err) => {
           console.log(err);
-          res.status(500).json({ message: "Internal Server Error" });
+          res.status(500).json({ message: "Internal Server Error1" });
         });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json({ message: "Internal Server Error" });
+      res.status(500).json({ message: "Internal Server Error2" });
     });
 });
 
@@ -112,10 +112,11 @@ router.post("/login", (req, res, next) => {
         // Send the token as the response
         res.status(200).json({ authToken });
       } else {
+        console.error(err);
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
     })
-    .catch((err) => res.status(500).json({ message: "Internal Server Error" }));
+    .catch((err) => res.status(500).json({ message: "Internal Server Error3" }));
 });
 
 // GET  /auth/verify

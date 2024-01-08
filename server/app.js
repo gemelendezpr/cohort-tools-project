@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 
 
-// var indexRouter = require("./routes/index");
 var cohortsRouter = require("./routes/cohort");
 var studentsRouter = require("./routes/student");
 var usersRouter = require('./routes/users');
