@@ -55,14 +55,14 @@ function CohortEditPage() {
     };
 
     axios
-      .put(`${API_URL}/cohorts/${cohortId}`, requestBody)
+      .post(`${API_URL}/cohorts/update/${cohortId}`, requestBody)
       .then(() => navigate(`/cohorts/details/${cohortId}`))
       .catch((error) => console.log(error));
   };
 
   const handleDelete = () => {
     axios
-      .delete(`${API_URL}/cohorts/${cohort._id}`)
+      .get(`${API_URL}/cohorts/delete/${cohort._id}`)
       .then(() => navigate(`/dashboard`))
       .catch((error) => console.log(error));
   };
