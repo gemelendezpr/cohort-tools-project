@@ -54,9 +54,7 @@ router.post("/update/:id", (req, res, next) => {
 });
 
 router.get('/delete/:id', (req, res, next) => {
-    Cohort.findByIdAndDelete(
-        req.params.id
-    )
+    Cohort.findByIdAndDelete(req.params.id)
     .then((updatedCohort) => {
         console.log(updatedCohort);
         res.status(200).send(updatedCohort);
