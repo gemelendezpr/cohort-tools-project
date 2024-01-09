@@ -28,6 +28,18 @@ router.get("/", (req, res, next) => {
       });
   });
 
+router.get("/cohort/:id", (req,res,next) => {
+    Student.find({cohort: req.params.id})
+    .then((foundStudents) => {
+        console.log(foundStudents);
+        res.status(201).send(foundStudents);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send(err);
+      });
+})
+
 router.get("/:id", (req, res, next) => {
   console.log("Hitting get route");
   Student.findById(req.params.id)
